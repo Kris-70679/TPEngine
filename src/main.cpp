@@ -30,7 +30,10 @@ void handle_accept(int server_fd, uint32_t events, ThreadPool &pool) {
 
 int main() {
     ThreadPool pool(POOL_NUMBERS);
-
+    
+    int opt = 1;
+    setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+    
     int server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd < 0) {
         std::cerr << "Socket creation failed." << std::endl;
