@@ -7,7 +7,7 @@
 
 const int PORT = 8080;
 const int MAX_EVENTS = 10000;
-const int POOL_NUMBERS = 2;
+const int POOL_NUMBERS = 4;
 
 void handle_accept(int server_fd, uint32_t events, ThreadPool &pool) {
     if (events & EPOLLIN) {
