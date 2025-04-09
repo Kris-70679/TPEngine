@@ -54,11 +54,7 @@ void Epoll::Run() {
 
     while (true) {
         const int n = epoll_wait(epoll_fd_, events_.data(), max_events_, -1);
-
         if (n < 0) {
-            if (errno == EINTR) {
-                continue;
-            }
             throw std::runtime_error("epoll_wait failed: " + std::string(strerror(errno)));
         }
 
