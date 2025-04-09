@@ -38,7 +38,11 @@ int main() {
     }
     
     int opt = 1;
-    setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
+        std::cerr << "setsockopt failed: " << strerror(errno) << std::endl;
+        close(server_fd);
+        return -1;
+    }
     
     sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
